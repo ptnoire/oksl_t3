@@ -6,8 +6,8 @@ import Link from "next/link";
 import { api } from "~/utils/api";
 
 const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
-  const user = useUser();
+  const { isLoaded: userLoaded, isSignedIn } = useUser();
+  const { user } = useUser();
   console.log(user);
 
   return (
@@ -19,8 +19,8 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
         <div className="flex justify-center text-cyan-100">
-          {!user.isSignedIn && <SignInButton />}
-          {!!user.isSignedIn && <SignOutButton />}
+          {!isSignedIn && <SignInButton />}
+          {!!isSignedIn && <SignOutButton />}
         </div>
       </main>
     </>
